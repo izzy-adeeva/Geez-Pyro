@@ -4,6 +4,7 @@ import sys
 
 import dotenv
 import heroku3
+import socket
 import requests
 import urllib3
 from pyrogram import Client, filters

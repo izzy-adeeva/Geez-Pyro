@@ -3,7 +3,7 @@
     "description": "An first Telegram Userbot with multi Clients for Spamming or Mass.",
     "logo": "https://telegra.ph/file/c78bb1efdeed38ee16eb2.png",
     "keywords": ["telegram", "userbot", "Geez", "pyrogram"],
-    "repository": "https://github.com/hitokizzy/Geez-Pyro",
+    "repository": "https://github.com/vckyou/Geez-Pyro",
     "stack": "container",
     "env": {
         "STRING_SESSION1": {

@@ -24,29 +24,29 @@ async def set_var(client: Client, message: Message):
         return await edit_or_reply(
             message, f"<b>Usage:</b> {CMD_HANDLER}setvar [Var Name] [Var Value]"
         )
-    Man = await edit_or_reply(message, "`Processing...`")
+    Puki = await edit_or_reply(message, "`Processing...`")
     to_set = message.text.split(None, 2)[1].strip()
     value = message.text.split(None, 2)[2].strip()
     if await in_heroku():
         if HAPP is None:
-            return await Man.edit(
+            return await Puki.edit(
                 "Pastikan HEROKU_API_KEY dan HEROKU_APP_NAME anda dikonfigurasi dengan benar di config vars heroku"
             )
         heroku_config = HAPP.config()
         if to_set in heroku_config:
-            await Man.edit(f"Berhasil Mengubah var {to_set} menjadi {value}")
+            await Puki.edit(f"Berhasil Mengubah var {to_set} menjadi {value}")
         else:
-            await Man.edit(f"Berhasil Menambahkan var {to_set} menjadi {value}")
+            await Puki.edit(f"Berhasil Menambahkan var {to_set} menjadi {value}")
         heroku_config[to_set] = value
     else:
         path = dotenv.find_dotenv("config.env")
         if not path:
-            return await Man.edit(".env file not found.")
+            return await Puki.edit(".env file not found.")
         dotenv.set_key(path, to_set, value)
         if dotenv.get_key(path, to_set):
-            await Man.edit(f"Berhasil Mengubah var {to_set} menjadi {value}")
+            await Puki.edit(f"Berhasil Mengubah var {to_set} menjadi {value}")
         else:
-            await Man.edit(f"Berhasil Menambahkan var {to_set} menjadi {value}")
+            await Puki.edit(f"Berhasil Menambahkan var {to_set} menjadi {value}")
         restart()
 
 
@@ -56,40 +56,40 @@ async def varget_(client: Client, message: Message):
         return await edit_or_reply(
             message, f"<b>Usage:</b> {CMD_HANDLER}getvar [Var Name]"
         )
-    Man = await edit_or_reply(message, "`Processing...`")
+    Puki = await edit_or_reply(message, "`Processing...`")
     check_var = message.text.split(None, 2)[1]
     if await in_heroku():
         if HAPP is None:
-            return await Man.edit(
+            return await Puki.edit(
                 "Pastikan HEROKU_API_KEY dan HEROKU_APP_NAME anda dikonfigurasi dengan benar di config vars heroku"
             )
         heroku_config = HAPP.config()
         if check_var in heroku_config:
-            return await Man.edit(
+            return await Puki.edit(
                 f"<b>{check_var}:</b> <code>{heroku_config[check_var]}</code>"
             )
         else:
-            return await Man.edit(f"Tidak dapat menemukan var {check_var}")
+            return await Puki.edit(f"Tidak dapat menemukan var {check_var}")
     else:
         path = dotenv.find_dotenv("config.env")
         if not path:
-            return await Man.edit(".env file not found.")
+            return await Puki.edit(".env file not found.")
         output = dotenv.get_key(path, check_var)
         if not output:
-            await Man.edit(f"Tidak dapat menemukan var {check_var}")
+            await Puki.edit(f"Tidak dapat menemukan var {check_var}")
         else:
-            return await Man.edit(f"<b>{check_var}:</b> <code>{str(output)}</code>")
+            return await Puki.edit(f"<b>{check_var}:</b> <code>{str(output)}</code>")
 
 
 @Client.on_message(filters.command("delvar", CMD_HANDLER) & filters.me)
 async def vardel_(client: Client, message: Message):
     if len(message.command) != 2:
         return await message.edit(f"<b>Usage:</b> {CMD_HANDLER}delvar [Var Name]")
-    Man = await edit_or_reply(message, "`Processing...`")
+    Puki = await edit_or_reply(message, "`Processing...`")
     check_var = message.text.split(None, 2)[1]
     if await in_heroku():
         if HAPP is None:
-            return await Man.edit(
+            return await Puki.edit(
                 "Pastikan HEROKU_API_KEY dan HEROKU_APP_NAME anda dikonfigurasi dengan benar di config vars heroku"
             )
         heroku_config = HAPP.config()

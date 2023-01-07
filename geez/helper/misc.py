@@ -106,7 +106,8 @@ def heroku():
                 LOGGER("Heroku").info(
                     f"Pastikan HEROKU_API_KEY dan HEROKU_APP_NAME anda dikonfigurasi dengan benar di config vars heroku."
                 )
-                
+
+
 async def in_heroku():
     return "heroku" in socket.getfqdn()
 
@@ -115,11 +116,11 @@ async def create_botlog(client):
     if HAPP is None:
         return
     LOGGER("geez").info(
-        "SEBENTAR YA KENTOD, GUA LAGI BIKIN GRUPLOG BUAT LU."
+        "TUNGGU SEBENTAR. SEDANG MEMBUAT GROUP LOG USERBOT UNTUK ANDA"
     )
-    desc = "Group Log untuk GeezProjects.\n\nHARAP JANGAN KELUAR DARI GROUP INI.\n\n"
+    desc = "Group Log untuk GeezProject.\n\nHARAP JANGAN KELUAR DARI GROUP INI.\n\n✨ Powered By ~ @GeezSupport ✨"
     try:
-        gruplog = await client.create_supergroup("Logs RamPyro-Bot", desc)
+        gruplog = await client.create_supergroup("Log UserBot", desc)
         if await in_heroku():
             heroku_var = HAPP.config()
             heroku_var["BOTLOG_CHATID"] = gruplog.id

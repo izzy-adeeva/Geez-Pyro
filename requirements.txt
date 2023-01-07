@@ -31,5 +31,6 @@ speedtest-cli==2.1.3
 tgcrypto 
 telegraph
 uwuify
+wget
 youtube-search-python
 yt-dlp

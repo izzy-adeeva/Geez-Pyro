@@ -12,11 +12,20 @@ from pyrogram.types import Message
 from config import *
 from geez.helper import restart
 from geez.helper.basic import edit_or_reply
-from geez.helper.misc import HAPP, in_heroku
+from config import GIT_TOKEN, REPO_URL, BRANCH
+
+HEROKU_API_KEY = getenv("HEROKU_API_KEY", None)
+HEROKU_APP_NAME = getenv("HEROKU_APP_NAME", None)
+
 from geez.modules.help import add_command_help
+HAPP = None
+
+async def in_heroku():
+    return "heroku" in socket.getfqdn()
 
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
 
 @Client.on_message(filters.command("setvar", CMD_HANDLER) & filters.me)
 async def set_var(client: Client, message: Message):

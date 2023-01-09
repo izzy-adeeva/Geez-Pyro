@@ -1,6 +1,7 @@
 import asyncio
 import shlex
 import socket
+import config
 from typing import Tuple
 
 import heroku3
@@ -22,9 +23,9 @@ XCB = [
     "git",
     "heroku",
     "push",
-    str(HEROKU_API_KEY),
+    str(config.HEROKU_API_KEY),
     "https",
-    str(HEROKU_APP_NAME),
+    str(config.HEROKU_APP_NAME),
     "HEAD",
     "main",
 ]
@@ -96,10 +97,10 @@ def is_heroku():
 def heroku():
     global HAPP
     if is_heroku:
-        if HEROKU_API_KEY and HEROKU_APP_NAME:
+        if config.HEROKU_API_KEY and config.HEROKU_APP_NAME:
             try:
-                Heroku = heroku3.from_key(HEROKU_API_KEY)
-                HAPP = Heroku.app(HEROKU_APP_NAME)
+                Heroku = heroku3.from_key(config.HEROKU_API_KEY)
+                HAPP = Heroku.app(config.HEROKU_APP_NAME)
                 LOGGER("geez").info(f"Heroku App Configured")
             except BaseException as e:
                 LOGGER("Heroku").error(e)

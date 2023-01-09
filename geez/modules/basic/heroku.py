@@ -1,4 +1,5 @@
 import asyncio
+import config
 import math
 import sys
 
@@ -13,7 +14,7 @@ from pyrogram.types import Message
 from config import *
 from geez.helper import restart
 from geez.helper.basic import edit_or_reply
-from geez.helper.misc import HAPP, in_heroku
+from geez.helper.misc import in_heroku
 from config import GIT_TOKEN, REPO_URL, BRANCH
 
 from geez.modules.help import add_command_help
@@ -21,6 +22,10 @@ from geez.modules.help import add_command_help
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
+if (config.HEROKU_API_KEY and config.HEROKU_APP_NAME):
+    HAPP = heroku3.from_key(app.HEROKU_API_KEY).apps()[config.HEROKU_APP_NAME]
+else:
+    HAPP = None
 
 @Client.on_message(filters.command("setvar", CMD_HANDLER) & filters.me)
 async def set_var(client: Client, message: Message):
